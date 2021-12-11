@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Player from 'src/types/Player';
 
 @Component({
   selector: 'app-board',
@@ -6,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  squares: any[];
+  squares: (Player)[];
   xIsNext: boolean;
-  winner: string | null;
   readonly winnerLines: [number, number, number][] = [
     [0, 1, 2],
     [3, 4, 5],
@@ -20,40 +20,29 @@ export class BoardComponent implements OnInit {
     [2, 4, 6]
   ];
 
-  constructor() { }
-
   ngOnInit(): void {
     this.newGame();
   }
 
-  newGame() {
+  public newGame() {
     this.squares = Array(9).fill(null);
-    this.winner = null;
     this.xIsNext = true;
   }
 
-  makeMove(idx: number) {
-    if(!this.squares[idx] && !this.winner) {
-      this.drawFigure(idx);
-      this.winner = this.calculateWinner();
+  public makeMove(position: number) {
+    if(!this.squares[position] && !this.winner) {
+      this.drawPlayer(position);
       this.togglePlayer();
     }
   }
 
-  private drawFigure(idx: number) {
-    this.squares.splice(idx, 1, this.player);
+  private drawPlayer(position: number) {
+    this.squares.splice(position, 1, this.player);
   }
 
   private togglePlayer() {
-    this.xIsNext = !this.xIsNext;
-  }
-
-  private calculateWinner(): string | null {
-    for(const line of this.winnerLines) {
-      if(this.checkLine(line))
-        return this.player;
-    }
-    return null;
+    if(!this.winner)
+      this.xIsNext = !this.xIsNext;
   }
 
   private checkLine(line: [number, number, number]) {
@@ -63,5 +52,13 @@ export class BoardComponent implements OnInit {
 
   get player() {
     return this.xIsNext ? 'X' : 'O';
+  }
+
+  get winner(): Player | null {
+    for(const line of this.winnerLines) {
+      if(this.checkLine(line))
+        return this.player;
+    }
+    return null;
   }
 }

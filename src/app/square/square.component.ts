@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import Player from 'src/types/Player';
 
 @Component({
   selector: 'app-square',
   template: `
-  <div [ngClass]="{'square-x': value === 'X', 'square-o' : value === 'O' }">
+  <div [ngClass]="{'square-x': player === 'X', 'square-o' : player === 'O' }">
     <p>
-      {{value}}
+      {{player}}
     </p>
   </div>
   `,
@@ -18,10 +19,10 @@ import { Component, Input, OnInit } from '@angular/core';
       align-items: center;
     }`,
     ".square-x { background: green; } ",
-    ".square-o { background: blue; }",
+    ".square-o { background: orange; } ",
   ]
 })
 export class SquareComponent  {
  
-  @Input() value: 'X' | 'O';
+  @Input() player: Player;
 }
