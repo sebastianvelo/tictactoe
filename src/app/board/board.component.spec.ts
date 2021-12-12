@@ -5,7 +5,7 @@ import { BoardComponent } from './board.component';
 describe('BoardComponent', () => {
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
-
+ 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ BoardComponent ]

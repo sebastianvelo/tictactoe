@@ -9,7 +9,7 @@ import Player from 'src/types/Player';
 export class BoardComponent implements OnInit {
   squares: (Player)[];
   xIsNext: boolean;
-  readonly winnerLines: [number, number, number][] = [
+  readonly winnerLines: number[][] = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -21,19 +21,24 @@ export class BoardComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.newGame();
+    this.resetGame();
   }
 
-  public newGame() {
+  public resetGame() {
     this.squares = Array(9).fill(null);
     this.xIsNext = true;
   }
 
-  public makeMove(position: number) {
+  public move(position: number) {
     if(!this.squares[position] && !this.winner) {
       this.drawPlayer(position);
       this.togglePlayer();
     }
+  }
+
+  private hasWin(line: number[]) {
+    const [a, b, c] = line;
+    return this.squares[a] && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c];
   }
 
   private drawPlayer(position: number) {
@@ -45,20 +50,19 @@ export class BoardComponent implements OnInit {
       this.xIsNext = !this.xIsNext;
   }
 
-  private checkLine(line: [number, number, number]) {
-    const [a, b, c] = line;
-    return this.squares[a] && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c];
-  }
-
   get player() {
     return this.xIsNext ? 'X' : 'O';
   }
 
   get winner(): Player | null {
     for(const line of this.winnerLines) {
-      if(this.checkLine(line))
+      if(this.hasWin(line))
         return this.player;
     }
     return null;
+  }
+
+  get draw(): boolean {
+    return !this.winner && this.squares.every(square => square);
   }
 }

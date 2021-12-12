@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "sv-tictactoe": {
+      "hosting": {
+        "tictactoe": [
+          "sv-tictactoe"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "sv-tictactoe"
+  }
+}

@@ -1,13 +1,16 @@
 <div class="board">
     <main class="board-game">
-        <app-square *ngFor="let val of squares; let i = index;" [player]="val" (click)="makeMove(i)">
+        <app-square *ngFor="let val of squares; let i = index;" [player]="val" (click)="move(i)">
         </app-square>
     </main>
     <div class="board-info">
-        <h1 *ngIf="!winner">Current player: {{player}}</h1>
+        <h1 *ngIf="!winner || draw">Current player: {{player}}</h1>
         <h1 *ngIf="winner">
-            Player {{ winner }} won the game!!
+            Player {{ winner }} won the game
         </h1>
-        <button (click)="newGame()">Start new game</button>
+        <h1 *ngIf="draw">
+            Draw
+        </h1>
+        <button (click)="resetGame()">Start new game</button>
     </div>
 </div>
