@@ -1,0 +1,58 @@
+.board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: "Quicksand", sans-serif;
+  background-color: #10202f;
+  color: white;
+  height: 100vh;
+  width: 100vw;
+}
+
+.board-info button {
+  padding: 16px;
+  background-color: steelblue;
+  color: whitesmoke;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.board-info button:hover {
+  background-color: #356a95;
+}
+
+.board-game {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (200px)[3];
+      grid-template-columns: repeat(3, 200px);
+  grid-gap: 0px;
+  width: 50vw;
+  place-content: center;
+}
+
+.board-game app-square {
+  border: 1px solid steelblue;
+  background-color: #111;
+  height: 200px;
+  font-size: 100px;
+  cursor: pointer;
+}
+
+.board-game app-square:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+/*# sourceMappingURL=board.component.css.map */
